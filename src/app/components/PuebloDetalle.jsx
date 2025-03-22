@@ -8,34 +8,74 @@ function PuebloDetalle({ params }) {
     const [pueblo, setPueblo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const puebloId = params?.id;
-
+    const [scraping, setScraping] = useState(false);
+    const [scrapeMessage, setScrapeMessage] = useState('');
+    const [puebloId, setPuebloId] = useState(null);
+    
+    // Handle params asynchronously
     useEffect(() => {
-        const fetchPuebloDetalle = async () => {
-            if (!puebloId) return;
-            
-            try {
-                setLoading(true);
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pueblos/${puebloId}/`);
-                
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                setPueblo(data);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
+        const getParams = async () => {
+            if (params) {
+                const id = await params.id;
+                setPuebloId(id);
             }
         };
+        
+        getParams();
+    }, [params]);
 
+    const fetchPuebloDetalle = async () => {
+        if (!puebloId) return;
+        
+        try {
+            setLoading(true);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/pueblos/${puebloId}/`);
+            
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            setPueblo(data);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
         fetchPuebloDetalle();
     }, [puebloId]);
 
     const handleVolver = () => {
         router.push('/');
+    };
+    
+    const scrapePueblo = async (puebloName) => {
+        try {
+            setScraping(true);
+            setScrapeMessage('');
+            
+            const response = await fetch('http://localhost:8000/api/trigger-scrape/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ pueblo_name: puebloName })
+            });
+            
+            const data = await response.json();
+            setScrapeMessage(data.message || 'Scrape completado');
+            
+            // Refresh pueblo data after scraping
+            fetchPuebloDetalle();
+        } catch (error) {
+            console.error('Error:', error);
+            setScrapeMessage('Error al realizar el scrape');
+        } finally {
+            setScraping(false);
+        }
     };
 
     if (loading) return <div className="p-4">Cargando...</div>;
@@ -82,6 +122,22 @@ function PuebloDetalle({ params }) {
                 
                 <div className="mt-8 pt-6 border-t border-gray-200">
                     <p className="text-sm text-gray-500">ID: {pueblo.id}</p>
+                </div>
+                
+                <div className="mt-6">
+                    <button 
+                        onClick={() => scrapePueblo(pueblo.nombre)}
+                        disabled={scraping}
+                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    >
+                        {scraping ? 'Procesando...' : 'Actualizar datos mediante scraping'}
+                    </button>
+                    
+                    {scrapeMessage && (
+                        <div className="mt-3 p-3 bg-blue-50 text-blue-800 rounded-md">
+                            {scrapeMessage}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
