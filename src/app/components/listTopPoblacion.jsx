@@ -40,21 +40,23 @@ function ListPoblacion() {
 
     return(
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Top 5 pueblos con menor población</h1>
+            <h3 className="text-xl font-semibold text-gray-700 mb-4">Top 5 pueblos con menor población</h3>
             
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="py-2 px-4 border-b">Nombre</th>
-                            <th className="py-2 px-4 border-b">Población</th>
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr className="bg-blue-50 border-b border-blue-200">
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Ranking</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Nombre</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Población</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {pueblos.map((pueblo) => (
-                            <tr key={pueblo.id} className="hover:bg-gray-50">
-                                <td className="py-2 px-4 border-b">{pueblo.nombre}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.poblacion}</td>
+                        {pueblos.map((pueblo, index) => (
+                            <tr key={pueblo.id} className="hover:bg-blue-50 border-b border-gray-100">
+                                <td className="py-2 px-4 font-medium">{index + 1}</td>
+                                <td className="py-2 px-4 font-medium">{pueblo.nombre}</td>
+                                <td className="py-2 px-4">{pueblo.poblacion}</td>
                             </tr>
                         ))}
                     </tbody>

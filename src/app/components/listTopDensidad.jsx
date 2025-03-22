@@ -40,25 +40,27 @@ function ListDensidad() {
 
     return(
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Top 5 pueblos con menor densidad de población por km²</h1>
+            <h3 className="text-xl font-semibold text-gray-700 mb-4">Top 5 pueblos con menor densidad de población</h3>
             
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="py-2 px-4 border-b">Nombre</th>
-                            <th className="py-2 px-4 border-b">Densidad (hab/km²)</th>
-                            <th className="py-2 px-4 border-b">Población (hab/km²)</th>
-                            <th className="py-2 px-4 border-b">Superficie (km²) (hab/km²)</th>
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr className="bg-blue-50 border-b border-blue-200">
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Ranking</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Nombre</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Densidad (hab/km²)</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Población</th>
+                            <th className="py-3 px-4 text-left text-sm font-medium text-blue-800">Superficie km²</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {pueblos.map((pueblo) => (
-                            <tr key={pueblo.id} className="hover:bg-gray-50">
-                                <td className="py-2 px-4 border-b">{pueblo.nombre}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.densidad_poblacion}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.poblacion}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.superficie_km2}</td>
+                        {pueblos.map((pueblo, index) => (
+                            <tr key={pueblo.id} className="hover:bg-blue-50 border-b border-gray-100">
+                                <td className="py-2 px-4 font-medium">{index + 1}</td>
+                                <td className="py-2 px-4 font-medium">{pueblo.nombre}</td>
+                                <td className="py-2 px-4">{pueblo.densidad_poblacion}</td>
+                                <td className="py-2 px-4">{pueblo.poblacion}</td>
+                                <td className="py-2 px-4">{pueblo.superficie_km2}</td>
                             </tr>
                         ))}
                     </tbody>

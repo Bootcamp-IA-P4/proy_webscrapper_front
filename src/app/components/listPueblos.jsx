@@ -135,56 +135,56 @@ function ListPueblos() {
 
     return(
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Listado de pueblos</h1>
+            <h3 className="text-xl font-semibold text-gray-700 mb-4">Listado completo de pueblos</h3>
             
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
-                    <thead className="bg-gray-100">
-                        <tr>
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr className="bg-blue-50 border-b border-blue-200">
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('id')}
                             >
                                 ID {sortField === 'id' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('nombre')}
                             >
                                 Nombre {sortField === 'nombre' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('provincia')}
                             >
                                 Provincia {sortField === 'provincia' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('comunidad_autonoma')}
                             >
                                 Comunidad Autónoma {sortField === 'comunidad_autonoma' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('poblacion')}
                             >
                                 Población {sortField === 'poblacion' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('superficie_km2')}
                             >
                                 Superficie (km²) {sortField === 'superficie_km2' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('densidad_poblacion')}
                             >
                                 Densidad {sortField === 'densidad_poblacion' && (sortDirection === 'asc' ? '↑' : '↓')}
                             </th>
                             <th 
-                                className="py-2 px-4 border-b cursor-pointer hover:bg-gray-200"
+                                className="py-3 px-4 text-left text-sm font-medium text-blue-800 cursor-pointer hover:bg-blue-100"
                                 onClick={() => handleSort('codigo_postal')}
                             >
                                 Código Postal {sortField === 'codigo_postal' && (sortDirection === 'asc' ? '↑' : '↓')}
@@ -193,15 +193,15 @@ function ListPueblos() {
                     </thead>
                     <tbody>
                         {currentItems.map((pueblo) => (
-                            <tr key={pueblo.id} className="hover:bg-gray-50">
-                                <td className="py-2 px-4 border-b">{pueblo.id}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.nombre}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.provincia}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.comunidad_autonoma}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.poblacion}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.superficie_km2}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.densidad_poblacion}</td>
-                                <td className="py-2 px-4 border-b">{pueblo.codigo_postal}</td>
+                            <tr key={pueblo.id} className="hover:bg-blue-50 border-b border-gray-100">
+                                <td className="py-2 px-4">{pueblo.id}</td>
+                                <td className="py-2 px-4 font-medium">{pueblo.nombre}</td>
+                                <td className="py-2 px-4">{pueblo.provincia}</td>
+                                <td className="py-2 px-4">{pueblo.comunidad_autonoma}</td>
+                                <td className="py-2 px-4">{pueblo.poblacion}</td>
+                                <td className="py-2 px-4">{pueblo.superficie_km2}</td>
+                                <td className="py-2 px-4">{pueblo.densidad_poblacion}</td>
+                                <td className="py-2 px-4">{pueblo.codigo_postal}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -209,31 +209,31 @@ function ListPueblos() {
             </div>
 
             {/* Paginación */}
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-6">
                 <div>
-                    <span className="text-sm">
+                    <span className="text-sm text-gray-600">
                         Mostrando {indexOfFirstItem + 1} a {Math.min(indexOfLastItem, totalItems)} de {totalItems} resultados
                     </span>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-1">
                     <button 
                         onClick={goToPreviousPage} 
                         disabled={currentPage === 1}
-                        className={`px-3 py-1 border rounded ${currentPage === 1 ? 'bg-gray-100 text-gray-400' : 'bg-white hover:bg-gray-50'}`}
+                        className={`px-3 py-1.5 border rounded-md text-sm font-medium ${currentPage === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-blue-600 hover:bg-blue-50 border-blue-200'}`}
                     >
                         Anterior
                     </button>
                     
                     {getPageNumbers().map((number, index) => (
                         number === '...' ? (
-                            <span key={`ellipsis-${index}`} className="px-3 py-1">
+                            <span key={`ellipsis-${index}`} className="px-3 py-1.5 text-gray-500">
                                 {number}
                             </span>
                         ) : (
                             <button
                                 key={number}
                                 onClick={() => paginate(number)}
-                                className={`px-3 py-1 border rounded ${currentPage === number ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-50'}`}
+                                className={`px-3 py-1.5 border rounded-md text-sm font-medium ${currentPage === number ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 hover:bg-blue-50 border-blue-200'}`}
                             >
                                 {number}
                             </button>
@@ -243,7 +243,7 @@ function ListPueblos() {
                     <button 
                         onClick={goToNextPage} 
                         disabled={currentPage === totalPages}
-                        className={`px-3 py-1 border rounded ${currentPage === totalPages ? 'bg-gray-100 text-gray-400' : 'bg-white hover:bg-gray-50'}`}
+                        className={`px-3 py-1.5 border rounded-md text-sm font-medium ${currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-blue-600 hover:bg-blue-50 border-blue-200'}`}
                     >
                         Siguiente
                     </button>
