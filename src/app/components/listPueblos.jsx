@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 
 function ListPueblos() {
     const [pueblos, setPueblos] = useState([]);
@@ -195,7 +196,11 @@ function ListPueblos() {
                         {currentItems.map((pueblo) => (
                             <tr key={pueblo.id} className="hover:bg-blue-50 border-b border-gray-100">
                                 <td className="py-2 px-4">{pueblo.id}</td>
-                                <td className="py-2 px-4 font-medium">{pueblo.nombre}</td>
+                                <td className="py-2 px-4 font-medium">
+                                    <Link href={`/pueblo/${pueblo.id}`} className="text-blue-600 hover:text-blue-800 hover:underline">
+                                        {pueblo.nombre}
+                                    </Link>
+                                </td>
                                 <td className="py-2 px-4">{pueblo.provincia}</td>
                                 <td className="py-2 px-4">{pueblo.comunidad_autonoma}</td>
                                 <td className="py-2 px-4">{pueblo.poblacion}</td>

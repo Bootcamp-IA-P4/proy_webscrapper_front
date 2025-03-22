@@ -8,7 +8,7 @@ function HomePage(){
       {/* Header */}
       <header className="bg-blue-800 text-white py-6 shadow-md">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold tracking-tight">DATOS ESTADÍSTICOS DE LOS PUEBLOS DE ESPAÑA</h1>
+          <h1 className="text-3xl font-bold tracking-tight">DATOS PUEBLOS DE ESPAÑA EN RIESGO DE DESPLOPLACIÓN</h1>
           <p className="mt-2 text-blue-100">Información demográfica y geográfica actualizada</p>
         </div>
       </header>
@@ -30,7 +30,7 @@ function HomePage(){
 
         {/* Full Data Table Section */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Base de Datos Completa</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200"></h2>
           <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
             <ListPueblos />
           </div>
